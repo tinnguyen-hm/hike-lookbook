@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>[Client] Employee Letter — Custom Insole Benefit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #EEF1F5; font-family: 'DM Sans', sans-serif; color: #090909; }
+  .navbar { position: sticky; top: 0; z-index: 999; background: #001342; color: #fff; padding: 10px 20px; font-family: sans-serif; font-size: 14px; }
+  .navbar a { color: #fff; text-decoration: none; }
+  .stage { padding: 32px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
+
+  .sheet {
+    position: relative;
+    width: 850px;
+    min-height: 1100px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    overflow: hidden;
+    padding: 48px 52px;
+  }
+  .sheet-label {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 12px;
+    color: #8A8F98;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* ---- Front page ---- */
+  .letterhead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 34px; }
+  .letterhead img.logo { height: 34px; width: auto; }
+  .client-badge {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: #024AE3;
+    background: rgba(2,73,227,0.08);
+    border: 1px solid rgba(2,73,227,0.25);
+    border-radius: 8px;
+    padding: 8px 14px;
+  }
+
+  .addr-block { font-size: 14px; line-height: 1.5; color: #333; margin-bottom: 30px; }
+  .addr-block .placeholder { color: #024AE3; font-style: italic; }
+
+  h1.headline {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    max-width: 620px;
+    margin-bottom: 26px;
+  }
+
+  .steps { display: flex; gap: 20px; margin-bottom: 32px; }
+  .step { flex: 1; text-align: left; }
+  .step img { width: 100%; height: auto; border-radius: 10px; margin-bottom: 10px; }
+  .step .num { font-family: 'Geologica', sans-serif; font-weight: 800; font-size: 12px; color: #024AE3; letter-spacing: 0.12em; }
+  .step .label { font-family: 'Geologica', sans-serif; font-weight: 700; font-size: 16px; margin-top: 2px; }
+  .step .body { font-size: 13px; color: #444; line-height: 1.35; margin-top: 4px; }
+
+  .info-table {
+    border: 1px solid #E2E4E9;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 26px;
+  }
+  .info-row { display: grid; grid-template-columns: 140px 1fr; border-top: 1px solid #E2E4E9; }
+  .info-row:first-child { border-top: none; }
+  .info-row .k { padding: 12px 16px; font-weight: 700; font-size: 13px; background: #F7F8FA; color: #444; }
+  .info-row .v { padding: 12px 16px; font-size: 13px; color: #090909; }
+  .info-row .v .placeholder { color: #024AE3; font-style: italic; }
+
+  .cta-row { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
+  .cta-row .qr { width: 96px; height: 96px; flex-shrink: 0; }
+  .cta-row .copy .get { font-family: 'Geologica', sans-serif; font-weight: 700; font-size: 18px; }
+  .cta-row .copy .url { font-size: 13px; color: #024AE3; margin-top: 2px; }
+
+  .partner-line { font-size: 14px; line-height: 1.5; color: #333; margin-bottom: 26px; max-width: 700px; }
+
+  .why-title { font-family: 'Geologica', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 10px; }
+  .why-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+  .why-list li { display: flex; gap: 10px; font-size: 13px; line-height: 1.4; color: #333; }
+  .why-list li .bullet { color: #024AE3; font-weight: 800; flex-shrink: 0; }
+
+  .sign-off { font-size: 14px; color: #333; margin-bottom: 22px; }
+  .sign-off .brand { font-family: 'Geologica', sans-serif; font-weight: 700; margin-top: 4px; display: block; }
+
+  .testimonial {
+    background: #F7F8FA;
+    border-left: 4px solid #024AE3;
+    border-radius: 8px;
+    padding: 18px 22px;
+    font-size: 13px;
+    font-style: italic;
+    color: #333;
+    line-height: 1.4;
+  }
+  .testimonial .attr { display: block; margin-top: 8px; font-style: normal; font-weight: 700; font-size: 12px; color: #555; }
+
+  /* ---- Back page (FAQ) ---- */
+  .faq-title { font-family: 'Geologica', sans-serif; font-weight: 800; font-size: 28px; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .faq-sub { font-size: 13px; color: #5A6171; margin-bottom: 26px; }
+  .faq-item { margin-bottom: 18px; }
+  .faq-item .q { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .faq-item .a { font-size: 13px; color: #333; line-height: 1.4; }
+  .faq-item .a b { color: #024AE3; }
+
+  .faq-qr-note { display: flex; align-items: center; gap: 16px; margin: 10px 0 18px; background: #F7F8FA; border-radius: 10px; padding: 12px 16px; }
+  .faq-qr-note img { width: 64px; height: 64px; flex-shrink: 0; }
+  .faq-qr-note span { font-size: 12px; color: #444; }
+
+  .support-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 20px 0 26px; }
+  .support-cell { background: #F7F8FA; border-radius: 10px; padding: 14px; text-align: center; }
+  .support-cell .label { font-weight: 700; font-size: 12px; color: #024AE3; text-transform: uppercase; letter-spacing: 0.06em; }
+  .support-cell .val { font-size: 12px; color: #333; margin-top: 4px; }
+
+  .footnote { font-size: 10px; color: #666; line-height: 1.4; border-top: 1px solid #E2E4E9; padding-top: 14px; }
+</style>
+</head>
+<body>
+<div class="navbar"><a href="index.html">&larr; Back to Lookbook</a></div>
+<div class="stage">
+
+  <!-- ============ FRONT ============ -->
+  <div>
+    <div class="sheet-label">Page 1 — Front</div>
+    <div class="sheet">
+      <div class="letterhead">
+        <img class="logo" src="images/hike-logo.png" alt="Hike Medical">
+        <div class="client-badge">[Client] Employee Benefit</div>
+      </div>
+
+      <div class="addr-block">
+        <span class="placeholder">«First» «Last»</span><br>
+        <span class="placeholder">«Address 1»</span><br>
+        <span class="placeholder">«City», «ST» «ZIP»</span>
+      </div>
+
+      <h1 class="headline">Hike makes it simple to get medical-grade custom insoles</h1>
+
+      <div class="steps">
+        <div class="step">
+          <img src="images/step-scan.png" alt="Scan step">
+          <div class="num">1 · SCAN</div>
+          <div class="label">Scan</div>
+          <div class="body">Takes about 5 minutes with your phone. Our AI technology creates a precise model of your feet.</div>
+        </div>
+        <div class="step">
+          <img src="images/step-build.png" alt="Build step">
+          <div class="num">2 · BUILD</div>
+          <div class="label">Build</div>
+          <div class="body">Your insoles are 3D-printed to spec, to the highest quality standards.</div>
+        </div>
+        <div class="step">
+          <img src="images/step-deliver.png" alt="Deliver step">
+          <div class="num">3 · DELIVER</div>
+          <div class="label">Deliver</div>
+          <div class="body">Arrives at home in about 2 weeks.</div>
+        </div>
+      </div>
+
+      <div class="info-table">
+        <div class="info-row"><div class="k">Name</div><div class="v placeholder">«First» «Last»</div></div>
+        <div class="info-row"><div class="k">Group</div><div class="v">[Client]</div></div>
+        <div class="info-row"><div class="k">Benefit</div><div class="v">Custom Insoles</div></div>
+        <div class="info-row"><div class="k">Date</div><div class="v placeholder">«Mail Date»</div></div>
+        <div class="info-row"><div class="k">Status</div><div class="v">Eligible to Redeem</div></div>
+        <div class="info-row"><div class="k">Cost</div><div class="v">As a [Client] member, you have exclusive access to custom insoles from Hike Medical at $150 per pair.*</div></div>
+      </div>
+
+      <div class="cta-row">
+        <img class="qr" src="images/letter-qr-order.png" alt="QR code to order">
+        <div class="copy">
+          <div class="get">Get yours today.</div>
+          <div class="url">Scan this QR code or visit: hikemedical.com/get-started</div>
+        </div>
+      </div>
+
+      <div class="partner-line">Through <b>[Client]'s partnership with Hike Medical</b>, you have exclusive access to clinical-grade custom insoles, backed by the Hike Fit Guarantee.</div>
+
+      <div class="why-title">Why Hike?</div>
+      <ul class="why-list">
+        <li><span class="bullet">•</span><span>When your feet aren't supported, your knees absorb extra stress, your hips compensate, and your lower back tightens to pick up the slack. <b>Custom insoles fix that at the foundation</b>, so the rest of your body doesn't have to.</span></li>
+        <li><span class="bullet">•</span><span>Store-bought insoles are one-size-fits-all. They wear down quickly and stop doing their job. A Hike insole is built from a precise scan with <b>medical-grade materials, made to last</b>.</span></li>
+        <li><span class="bullet">•</span><span>Getting custom insoles through a specialist means multiple appointments, months of waiting, and costs that can reach <b>$300 to $1,000+</b>. Hike delivers the same clinical-grade result in two weeks, exclusively accessible through [Client].</span></li>
+      </ul>
+
+      <div class="sign-off">
+        We hope to serve you next!
+        <span class="brand">Hike Medical</span>
+      </div>
+
+      <div class="testimonial">
+        "For years I have been dealing with knee pain. The day I went to work with my custom insoles I felt like a new man! Walking doesn't hurt. I felt like I could actually run! And my knee pain disappeared!"
+        <span class="attr">— Hike Member and Construction Worker</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BACK (FAQ) ============ -->
+  <div>
+    <div class="sheet-label">Page 2 — FAQ (back)</div>
+    <div class="sheet">
+      <div class="faq-title">Frequently Asked Questions</div>
+      <div class="faq-sub">Your Hike Medical custom insole benefit · [Client] Employee Benefit</div>
+
+      <div class="faq-item">
+        <div class="q">How do I know this is legitimate?</div>
+        <div class="a">This benefit is provided through <b>[Client]</b>. Questions? Reach out to Hike User Support at support@hikemedical.com or 309-306-3696.</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">Who is eligible, and what does it cost?</div>
+        <div class="a">All eligible <b>[Client]</b> employees. Custom insoles are available at the exclusive price of <b>$150 each</b>, HSA-eligible.</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">Do I need a doctor's visit or prescription?</div>
+        <div class="a">No. You order entirely from home with no appointments, referrals, or paperwork. All you need is your smartphone and about 5 minutes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">How do I place my order?</div>
+        <div class="a">Visit <b>hikemedical.com/get-started</b> or scan the QR code on the front of this letter. Create your account, scan your feet in-app, and submit your order.</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">How long does delivery take?</div>
+        <div class="a">Your custom insoles are typically delivered to the provided address within approximately <b>2 weeks</b> of placing your order.</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">What if my insoles don't fit?</div>
+        <div class="a">That's where the <b>Hike Fit Guarantee</b> comes in. If it's not right, we'll figure out what's wrong and make you a new pair, on us.</div>
+      </div>
+      <div class="faq-item">
+        <div class="q">How do I scan my feet?</div>
+        <div class="a">Using your smartphone, Hike technology captures the shape of your feet as you glide the phone in an arc around your foot. Scan the QR code to watch the how-to video.</div>
+      </div>
+
+      <div class="faq-qr-note">
+        <img src="images/letter-qr-video.png" alt="QR code to how-to-scan video">
+        <span>Scan to watch the <b>how-to-scan video</b></span>
+      </div>
+
+      <div class="faq-item">
+        <div class="q">Is my information private during the scan?</div>
+        <div class="a">Yes. The scan captures only the shape of your feet. No location data is recorded.</div>
+      </div>
+
+      <div class="faq-title" style="font-size:18px;margin-top:8px;">Member Support</div>
+      <div class="faq-sub" style="margin-bottom:6px;">Reach us your way</div>
+      <div class="support-grid">
+        <div class="support-cell"><div class="label">Text</div><div class="val">309-306-3696</div></div>
+        <div class="support-cell"><div class="label">Email</div><div class="val">support@hikemedical.com</div></div>
+        <div class="support-cell"><div class="label">Chat</div><div class="val">in the Hike portal</div></div>
+        <div class="support-cell"><div class="label">Call</div><div class="val">309-306-3696</div></div>
+      </div>
+
+      <div class="footnote">
+        *Available at the exclusive [Client] price of $150 each, HSA-eligible. Eligibility to receive Hike Custom Insoles is subject to the agreement between your organization and Hike Medical, including your current employment and/or membership status. Questions? Contact your benefits administrator or support@hikemedical.com.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body></html>

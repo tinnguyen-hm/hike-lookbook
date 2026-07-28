@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Coming Soon — Custom Insole Benefit Flyer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@500;700;800&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #EEF1F5; font-family: 'DM Sans', sans-serif; }
+  .navbar { position: sticky; top: 0; z-index: 999; background: #001342; color: #fff; padding: 10px 20px; font-family: sans-serif; font-size: 14px; }
+  .navbar a { color: #fff; text-decoration: none; }
+  .stage { padding: 32px; display: flex; justify-content: center; }
+  .flyer {
+    position: relative;
+    width: 850px;
+    min-height: 1100px;
+    background: linear-gradient(0deg, rgba(2,73,227,0.05), rgba(2,73,227,0.05)), #FFFFFF;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .content { padding: 38px 40px 0; }
+  h1.title {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #090909;
+    text-transform: capitalize;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 500;
+    font-size: 34px;
+    letter-spacing: -0.03em;
+    color: #0249E3;
+    margin-bottom: 28px;
+  }
+  .section-title {
+    font-weight: 700;
+    font-size: 20px;
+    color: #000;
+    margin-bottom: 6px;
+  }
+  .section-body {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.35;
+    color: #333;
+    max-width: 730px;
+  }
+
+  .compare {
+    margin: 28px 40px 0;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    background: #fff;
+  }
+  .compare table { width: 100%; border-collapse: collapse; }
+  .compare th {
+    padding: 18px 12px;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 800;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: #292929;
+    text-align: center;
+    background: #F3F1F1;
+  }
+  .compare th.hike-col {
+    color: #024AE3;
+    background: rgba(3,74,227,0.1);
+  }
+  .compare td {
+    padding: 14px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    color: #000;
+    border-top: 1px solid #929292;
+  }
+  .compare td.label {
+    text-align: left;
+    font-weight: 700;
+    font-size: 14px;
+    padding-left: 12px;
+  }
+  .compare td.hike-col { background: #fff; }
+  .check-blue { color: #034AE3; font-size: 18px; font-weight: 800; }
+  .check-gray { color: #9E9E9E; font-size: 18px; font-weight: 800; }
+  .x-pink { color: #FF4570; font-size: 18px; font-weight: 800; }
+
+  .benefits {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 30px 40px 0;
+  }
+  .benefits-copy { max-width: 610px; }
+  .benefits .section-title { font-size: 20px; }
+  .cta-btn {
+    display: block;
+    width: 280px;
+    height: auto;
+    margin-top: 20px;
+  }
+
+  .art { flex-shrink: 0; width: 260px; display: flex; align-items: center; justify-content: center; }
+  .art img { width: 100%; height: auto; display: block; }
+
+  .trust-bar {
+    margin-top: 30px;
+    background: rgba(2,73,227,0.15);
+    text-align: center;
+    padding: 8px 0;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+  }
+  .footer-bar {
+    background: #0249E3;
+    color: #fff;
+    padding: 18px 40px 24px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    opacity: 0.95;
+    text-align: center;
+  }
+  .footer-bar b { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="navbar"><a href="index.html">&larr; Back to Lookbook</a></div>
+<div class="stage">
+  <div class="flyer">
+    <div class="content">
+      <h1 class="title">Coming Soon:<br>Your New Custom Insole Benefit</h1>
+      <div class="subtitle">Support Designed for You</div>
+      <div class="section-title">Built For Your Feet</div>
+      <div class="section-body">Insoles from the store are built for generic feet and wear out quickly. Hike builds your clinical-grade custom insoles from a 5-minute scan on your phone and delivers them to your door in two weeks.</div>
+    </div>
+
+    <div class="compare">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;background:transparent;"></th>
+            <th class="hike-col">Hike</th>
+            <th>Over the counter</th>
+            <th>Traditional Custom</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Custom built for you</td>
+            <td class="hike-col"><span class="check-blue">✓</span></td>
+            <td><span class="x-pink">✕</span></td>
+            <td><span class="check-gray">✓</span></td>
+          </tr>
+          <tr>
+            <td class="label">Prevents bunions &amp; ulcers</td>
+            <td class="hike-col"><span class="check-blue">✓</span></td>
+            <td><span class="x-pink">✕</span></td>
+            <td><span class="check-gray">✓</span></td>
+          </tr>
+          <tr>
+            <td class="label">Promotes body alignment</td>
+            <td class="hike-col"><span class="check-blue">✓</span></td>
+            <td><span class="x-pink">✕</span></td>
+            <td><span class="check-gray">✓</span></td>
+          </tr>
+          <tr>
+            <td class="label">Built to last</td>
+            <td class="hike-col"><span class="check-blue">✓</span></td>
+            <td><span class="x-pink">✕</span></td>
+            <td><span class="check-gray">✓</span></td>
+          </tr>
+          <tr>
+            <td class="label">Speed</td>
+            <td class="hike-col">5 minute scan</td>
+            <td>A trip to the store</td>
+            <td>3 – 4 clinical visits</td>
+          </tr>
+          <tr>
+            <td class="label">Time commitment</td>
+            <td class="hike-col">Delivered to your door in 2 weeks</td>
+            <td>Trying on your own for weeks</td>
+            <td>9 weeks end to end</td>
+          </tr>
+          <tr>
+            <td class="label">Fit guarantee</td>
+            <td class="hike-col">Amazing fit or Hike will rebuild for free</td>
+            <td>None</td>
+            <td>Depends</td>
+          </tr>
+          <tr>
+            <td class="label">Affordable</td>
+            <td class="hike-col"><b>$150</b></td>
+            <td>$20 – $200</td>
+            <td>$800+ on average</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="benefits">
+      <div class="benefits-copy">
+        <div class="section-title">Available Through Your Benefits</div>
+        <div class="section-body">Your benefits provide access to preferred pricing on Hike Custom Insoles—offering personalized support without clinic visits or extensive paperwork.</div>
+        <img class="cta-btn" src="images/personify-button.png" alt="Access via Personify Health">
+      </div>
+      <div class="art"><img src="images/insole-flyer.png" alt="Hike custom insole"></div>
+    </div>
+
+    <div class="trust-bar">Trusted by clinicians and used daily by thousands</div>
+    <div class="footer-bar">
+      Eligibility to receive Hike Custom Insoles is subject to the agreement between your organization and Hike Medical, including your current employment and/or membership status.<br>
+      <b>Questions?</b> Contact your benefits administrator or support@hikemedical.com.
+    </div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>[Client] × Hike Medical — Social Posts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #024AE3;
+    --blue-soft: #E6EDFE;
+    --navy: #001342;
+    --canvas: #EEF1F5;
+    --paper: #FFFFFF;
+    --ink: #0E1116;
+    --ink-2: #2A2F38;
+    --muted: #5A6171;
+    --hairline: rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: 'Manrope', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .navbar { position: sticky; top: 0; z-index: 999; background: var(--navy); color: #fff; padding: 10px 20px; font-family: sans-serif; font-size: 14px; }
+  .navbar a { color: #fff; text-decoration: none; }
+
+  .review-shell { padding: 40px 48px 72px; max-width: 1840px; margin: 0 auto; }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 48px 56px;
+    justify-content: start;
+  }
+  .social-cell { display: flex; flex-direction: column; gap: 14px; }
+  .social-head {
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .social-head .pill {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #fff; font-weight: 700;
+    padding: 4px 8px; border-radius: 3px;
+    white-space: nowrap;
+  }
+  .social-head .pill.opt-1 { background: var(--blue); }
+  .social-head .pill.opt-2 { background: var(--ink); }
+  .social-head .lang { font-weight: 700; font-size: 13px; color: var(--ink); }
+  .social-head .tag {
+    font-family: ui-monospace,'SF Mono',Menlo,monospace;
+    font-size: 11px; color: var(--muted); margin-left: auto; letter-spacing: 0.04em;
+  }
+
+  .fb-post {
+    width: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.10), 0 12px 28px rgba(0,0,0,0.12);
+    overflow: hidden;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #050505;
+  }
+  .fb-head {
+    display: grid; grid-template-columns: 40px 1fr auto auto;
+    gap: 10px; align-items: center;
+    padding: 12px 16px 10px;
+  }
+  .fb-head .av {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff;
+    display: grid; place-items: center;
+    color: #024AE3; font-weight: 800; font-size: 14px;
+    overflow: hidden;
+    border: 1px solid #DADDE1;
+  }
+  .fb-head .meta { line-height: 1.2; min-width: 0; }
+  .fb-head .meta .name {
+    font-weight: 600; font-size: 15px; color: #050505;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .fb-head .meta .name .verified {
+    width: 14px; height: 14px; color: #1877F2;
+    display: inline-block; vertical-align: middle;
+  }
+  .fb-head .meta .when {
+    font-size: 13px; color: #65676B; font-weight: 400;
+    display: flex; align-items: center; gap: 4px; margin-top: 2px;
+  }
+  .fb-head .meta .when .dot { width: 2px; height: 2px; border-radius: 50%; background: #65676B; }
+  .fb-head .meta .when .globe { width: 12px; height: 12px; color: #65676B; }
+  .fb-head .more, .fb-head .close {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center;
+    color: #65676B; font-weight: 800; font-size: 18px;
+    cursor: default;
+  }
+  .fb-caption {
+    padding: 0 16px 12px;
+    font-size: 15px; line-height: 1.4; color: #050505;
+    white-space: pre-wrap;
+  }
+  .fb-caption .url { color: #1877F2; font-weight: 500; word-break: break-all; }
+  .fb-caption b { font-weight: 700; }
+
+  .fb-link-card {
+    margin: 0;
+    border-top: 1px solid #CED0D4;
+    border-bottom: 1px solid #CED0D4;
+    background: #F0F2F5;
+    overflow: hidden;
+  }
+  .fb-link-card .img {
+    width: 100%;
+    aspect-ratio: 1.91 / 1;
+    background: #E6EDFE;
+    display: grid; place-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .fb-link-card .img.opt-1 {
+    background: #024AE3;
+    color: #fff;
+  }
+  .fb-link-card .img.opt-2 {
+    background: #001342;
+    color: #fff;
+  }
+  .fb-link-card .img .img-inner {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 24px;
+    padding: 28px 36px;
+    width: 100%; height: 100%;
+  }
+  .fb-link-card .img h3 {
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-weight: 800; font-size: 30px; line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .fb-link-card .img .insole-art {
+    width: auto; height: auto;
+    display: inline-grid; place-items: center;
+    background: #fff;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+  }
+  .fb-link-card .img .insole-art img {
+    width: 220px; height: auto; display: block;
+  }
+  .fb-link-card .meta {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: center;
+    padding: 12px 16px;
+    background: #F0F2F5;
+  }
+  .fb-link-card .meta .domain {
+    font-size: 13px; color: #65676B; text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .fb-link-card .meta .title {
+    font-size: 17px; font-weight: 600; color: #050505;
+    line-height: 1.25; margin-top: 2px;
+    text-wrap: balance;
+  }
+  .fb-link-card .meta .desc {
+    font-size: 14px; color: #65676B; margin-top: 2px;
+    line-height: 1.3;
+  }
+  .fb-link-card .meta .cta-btn {
+    background: #E4E6EB; color: #050505;
+    font-weight: 600; font-size: 15px;
+    padding: 8px 14px; border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .fb-counts {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 14px; color: #65676B;
+  }
+  .fb-counts .reactions { display: flex; align-items: center; gap: 6px; }
+  .fb-counts .reactions .stack { display: flex; }
+  .fb-counts .reactions .react {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 1.5px solid #fff;
+    display: grid; place-items: center;
+    color: #fff; font-size: 11px;
+    margin-left: -4px;
+  }
+  .fb-counts .reactions .react:first-child { margin-left: 0; }
+  .fb-counts .reactions .react.like { background: #1877F2; }
+  .fb-counts .reactions .react.heart { background: #F33E58; }
+  .fb-counts .reactions .react.care { background: #F7B125; }
+
+  .fb-actions { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #CED0D4; }
+  .fb-actions .act {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 8px 0; font-size: 15px; font-weight: 600; color: #65676B;
+  }
+  .fb-actions .act svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+</style>
+</head>
+<body>
+<div class="navbar"><a href="index.html">&larr; Back to Lookbook</a></div>
+<div class="review-shell"><section class="group" data-screen-label="02 Social Posts">
+    <div class="social-grid">
+
+      <!-- ============ Option 1 ============ -->
+      <div class="social-cell">
+        <div class="social-head">
+          <span class="pill opt-1">Option 1</span>
+          <span class="lang">Benefit Announcement</span>
+          <span class="tag">1200 × 630</span>
+        </div>
+        <div class="fb-post">
+          <div class="fb-head">
+            <div class="av" style="background:#024AE3;color:#fff;font-weight:800;font-size:15px;">C</div>
+            <div class="meta">
+              <div class="name">[Client] <svg class="verified" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L9.5 2.4 12.3 1.7 12.7 4.5 15.5 5 14.4 7.6 16 10 13.6 11.7 14 14.5 11.2 14.7 10 17.3 8 15.6 6 17.3 4.8 14.7 2 14.5 2.4 11.7 0 10 1.6 7.6 0.5 5 3.3 4.5 3.7 1.7 6.5 2.4z"></path><path d="M5 8.3l2 2 4-4.3" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+              <div class="when">2h <span class="dot"></span> <svg class="globe" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1"></circle><path d="M1 6h10M6 1c2 1.5 2 8 0 10M6 1c-2 1.5-2 8 0 10" fill="none" stroke="currentColor" stroke-width="1"></path></svg></div>
+            </div>
+            <div class="more">⋯</div>
+            <div class="close">×</div>
+          </div>
+
+          <div class="fb-caption">On your feet all day? As a [Client] member, you get <b>exclusive access to custom insoles from Hike Medical at $150</b>.
+
+Store-bought insoles wear down fast and don't support the work you're actually doing. Hike builds yours from a precise scan of your feet. Medical-grade, made to last.
+
+Scan with your phone → Custom insoles delivered in 2 weeks → No appointments or paperwork
+
+Get yours: <span class="url">go.hikemedical.com/client-now</span></div>
+
+          <div class="fb-link-card">
+            <div class="img opt-1">
+              <div class="img-inner">
+                <h3>Your 2026 insole benefit is here.</h3>
+                <div class="insole-art"><img src="images/insole-social.png" alt="Hike custom insole"></div>
+              </div>
+            </div>
+            <div class="meta">
+              <div class="text">
+                <div class="domain">GO.HIKEMEDICAL.COM</div>
+                <div class="title">Claim your 2026 custom insoles — $150</div>
+                <div class="desc">Exclusive to [Client] members. No appointments, no paperwork.</div>
+              </div>
+              <div class="cta-btn">Order Now</div>
+            </div>
+          </div>
+
+          <div class="fb-counts">
+            <div class="reactions">
+              <div class="stack">
+                <span class="react like">👍</span>
+                <span class="react heart">❤</span>
+                <span class="react care">🤗</span>
+              </div>
+              <span style="margin-left:6px;">Todd W., Marco G. and 247 others</span>
+            </div>
+            <div>34 comments · 18 shares</div>
+          </div>
+
+          <div class="fb-actions">
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M7 11v9H4v-9zM21 12a3 3 0 0 0-3-3h-4l1-4a2 2 0 0 0-4 0L9 11v9h9a3 3 0 0 0 3-3z"></path></svg> Like</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3-6.2L21 4v5h-5"></path></svg> Comment</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M4 12v8h16v-8M16 6l-4-4-4 4M12 2v14"></path></svg> Share</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ Option 2 ============ -->
+      <div class="social-cell">
+        <div class="social-head">
+          <span class="pill opt-2">Option 2</span>
+          <span class="lang">Plain-spoken</span>
+          <span class="tag">1200 × 630</span>
+        </div>
+        <div class="fb-post">
+          <div class="fb-head">
+            <div class="av" style="background:#024AE3;color:#fff;font-weight:800;font-size:15px;">C</div>
+            <div class="meta">
+              <div class="name">[Client] <svg class="verified" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0L9.5 2.4 12.3 1.7 12.7 4.5 15.5 5 14.4 7.6 16 10 13.6 11.7 14 14.5 11.2 14.7 10 17.3 8 15.6 6 17.3 4.8 14.7 2 14.5 2.4 11.7 0 10 1.6 7.6 0.5 5 3.3 4.5 3.7 1.7 6.5 2.4z"></path><path d="M5 8.3l2 2 4-4.3" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></svg></div>
+              <div class="when">5h <span class="dot"></span> <svg class="globe" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1"></circle><path d="M1 6h10M6 1c2 1.5 2 8 0 10M6 1c-2 1.5-2 8 0 10" fill="none" stroke="currentColor" stroke-width="1"></path></svg></div>
+            </div>
+            <div class="more">⋯</div>
+            <div class="close">×</div>
+          </div>
+
+          <div class="fb-caption">You work hard. Your feet shouldn't pay for it. Your [Client] benefits include <b>exclusive access to Hike Medical custom insoles at $150 per pair</b>. No appointments, no paperwork, no co-pay.
+
+Scan from your phone in 5 minutes.
+
+<span class="url">go.hikemedical.com/client-open</span></div>
+
+          <div class="fb-link-card">
+            <div class="img opt-2">
+              <div class="img-inner">
+                <h3>Every pair. $150.</h3>
+                <div class="insole-art"><img src="images/insole-social.png" alt="Hike custom insole"></div>
+              </div>
+            </div>
+            <div class="meta">
+              <div class="text">
+                <div class="domain">GO.HIKEMEDICAL.COM</div>
+                <div class="title">Custom insoles, exclusive [Client] pricing</div>
+                <div class="desc">Built from a scan of your feet. Delivered in 2 weeks.</div>
+              </div>
+              <div class="cta-btn">Get Yours</div>
+            </div>
+          </div>
+
+          <div class="fb-counts">
+            <div class="reactions">
+              <div class="stack">
+                <span class="react like">👍</span>
+                <span class="react heart">❤</span>
+              </div>
+              <span style="margin-left:6px;">Maria R. and 412 others</span>
+            </div>
+            <div>57 comments · 29 shares</div>
+          </div>
+
+          <div class="fb-actions">
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M7 11v9H4v-9zM21 12a3 3 0 0 0-3-3h-4l1-4a2 2 0 0 0-4 0L9 11v9h9a3 3 0 0 0 3-3z"></path></svg> Like</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3-6.2L21 4v5h-5"></path></svg> Comment</div>
+            <div class="act"><svg viewBox="0 0 24 24"><path d="M4 12v8h16v-8M16 6l-4-4-4 4M12 2v14"></path></svg> Share</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section></div>
+</body></html>
